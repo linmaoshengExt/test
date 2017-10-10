@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.aidenj.payment.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="pers.aidenj.payment.model.Order" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="IDENTIFICATION" property="identification" jdbcType="VARCHAR" />
+    <result column="COMMODITYID" property="commodityid" jdbcType="VARCHAR" />
+    <result column="COMMODITYPRICE" property="commodityprice" jdbcType="DOUBLE" />
+    <result column="COMMODITYNUMBER" property="commoditynumber" jdbcType="INTEGER" />
+    <result column="COMMODITYNAME" property="commodityname" jdbcType="VARCHAR" />
+    <result column="COMMODITYDESCRIBE" property="commoditydescribe" jdbcType="VARCHAR" />
+    <result column="COMMODITYTYPE" property="commoditytype" jdbcType="VARCHAR" />
+    <result column="ORDERNUMBER" property="ordernumber" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="USERID" property="userid" jdbcType="BIGINT" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="ORDERAMOUNT" property="orderamount" jdbcType="DOUBLE" />
+    <result column="PAYMENTMETHOD" property="paymentmethod" jdbcType="VARCHAR" />
+    <result column="PAYMENTTYPE" property="paymenttype" jdbcType="VARCHAR" />
+    <result column="SERVICETYPE" property="servicetype" jdbcType="VARCHAR" />
+    <result column="ORDERSTATUS" property="orderstatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, IDENTIFICATION, COMMODITYID, COMMODITYPRICE, COMMODITYNUMBER, COMMODITYNAME, 
+    COMMODITYDESCRIBE, COMMODITYTYPE, ORDERNUMBER, STARTTIME, ENDTIME, USERID, IP, ORDERAMOUNT, 
+    PAYMENTMETHOD, PAYMENTTYPE, SERVICETYPE, ORDERSTATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `ORDER`
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findOrderNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from `ORDER`
+    where ORDERNUMBER = #{orderNumber,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="getListOrder" resultMap="BaseResultMap" parameterType="pers.aidenj.payment.model.Order" >
+  
+  select
+  <include refid="Base_Column_List" />
+  from `ORDER`
+  where
+  <trim suffixOverrides="and" >
+      <if test="identification != null" >
+         IDENTIFICATION = #{identification,jdbcType=VARCHAR} and
+      </if>
+      <if test="commodityid != null" >
+         COMMODITYID = #{commodityid,jdbcType=VARCHAR} and
+      </if>
+      <if test="commodityprice != null" >
+         COMMODITYPRICE = #{commodityprice,jdbcType=DOUBLE} and
+      </if>
+      <if test="commoditynumber != null" > 
+        COMMODITYNUMBER = #{commoditynumber,jdbcType=INTEGER} and
+      </if>
+      <if test="commodityname != null" >
+        COMMODITYNAME = #{commodityname,jdbcType=VARCHAR} and
+      </if>
+      <if test="commoditydescribe != null" >
+        COMMODITYDESCRIBE = #{commoditydescribe,jdbcType=VARCHAR} and
+      </if>
+      <if test="commoditytype != null" >
+        COMMODITYTYPE = #{commoditytype,jdbcType=VARCHAR} and
+      </if>
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP} and
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=TIMESTAMP} and
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=BIGINT} and
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR} and
+      </if>
+      <if test="orderamount != null" >
+        ORDERAMOUNT = #{orderamount,jdbcType=DOUBLE} and
+      </if>
+      <if test="paymentmethod != null" >
+        PAYMENTMETHOD = #{paymentmethod,jdbcType=VARCHAR} and
+      </if>
+      <if test="paymenttype != null" >
+        PAYMENTTYPE = #{paymenttype,jdbcType=VARCHAR} and
+      </if>
+      <if test="servicetype != null" >
+        SERVICETYPE = #{servicetype,jdbcType=VARCHAR} and
+      </if>
+      <if test="orderstatus != null" > 
+        ORDERSTATUS = #{orderstatus,jdbcType=VARCHAR} and
+      </if>
+      <if test="ordernumber != null" >
+        ORDERNUMBER = #{ordernumber,jdbcType=VARCHAR} and
+      </if>
+      </trim>
+  </select>
+  
+  <insert id="insertSelective" parameterType="pers.aidenj.payment.model.Order" >
+    insert into `ORDER`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="identification != null" >
+        IDENTIFICATION,
+      </if>
+      <if test="commodityid != null" >
+        COMMODITYID,
+      </if>
+      <if test="commodityprice != null" >
+        COMMODITYPRICE,
+      </if>
+      <if test="commoditynumber != null" >
+        COMMODITYNUMBER,
+      </if>
+      <if test="commodityname != null" >
+        COMMODITYNAME,
+      </if>
+      <if test="commoditydescribe != null" >
+        COMMODITYDESCRIBE,
+      </if>
+      <if test="commoditytype != null" >
+        COMMODITYTYPE,
+      </if>
+      <if test="ordernumber != null" >
+        ORDERNUMBER,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+      <if test="orderamount != null" >
+        ORDERAMOUNT,
+      </if>
+      <if test="paymentmethod != null" >
+        PAYMENTMETHOD,
+      </if>
+      <if test="paymenttype != null" >
+        PAYMENTTYPE,
+      </if>
+      <if test="servicetype != null" >
+        SERVICETYPE,
+      </if>
+      <if test="orderstatus != null" >
+        ORDERSTATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="identification != null" >
+        #{identification,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityid != null" >
+        #{commodityid,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityprice != null" >
+        #{commodityprice,jdbcType=DOUBLE},
+      </if>
+      <if test="commoditynumber != null" >
+        #{commoditynumber,jdbcType=INTEGER},
+      </if>
+      <if test="commodityname != null" >
+        #{commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditydescribe != null" >
+        #{commoditydescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditytype != null" >
+        #{commoditytype,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="orderamount != null" >
+        #{orderamount,jdbcType=DOUBLE},
+      </if>
+      <if test="paymentmethod != null" >
+        #{paymentmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="paymenttype != null" >
+        #{paymenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="servicetype != null" >
+        #{servicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus != null" >
+        #{orderstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.aidenj.payment.model.Order" >
+    update `ORDER`
+    <set >
+      <if test="identification != null" >
+        IDENTIFICATION = #{identification,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityid != null" >
+        COMMODITYID = #{commodityid,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityprice != null" >
+        COMMODITYPRICE = #{commodityprice,jdbcType=DOUBLE},
+      </if>
+      <if test="commoditynumber != null" >
+        COMMODITYNUMBER = #{commoditynumber,jdbcType=INTEGER},
+      </if>
+      <if test="commodityname != null" >
+        COMMODITYNAME = #{commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditydescribe != null" >
+        COMMODITYDESCRIBE = #{commoditydescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditytype != null" >
+        COMMODITYTYPE = #{commoditytype,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="orderamount != null" >
+        ORDERAMOUNT = #{orderamount,jdbcType=DOUBLE},
+      </if>
+      <if test="paymentmethod != null" >
+        PAYMENTMETHOD = #{paymentmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="paymenttype != null" >
+        PAYMENTTYPE = #{paymenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="servicetype != null" >
+        SERVICETYPE = #{servicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus != null" >
+        ORDERSTATUS = #{orderstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where  ORDERNUMBER = #{ordernumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

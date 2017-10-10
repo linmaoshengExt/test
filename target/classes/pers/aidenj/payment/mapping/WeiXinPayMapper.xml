@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.aidenj.payment.mapper.WeiXinPayMapper" >
+  <resultMap id="BaseResultMap" type="pers.aidenj.payment.model.Order" >
+    <result column="ORDERNUMBER" property="ordernumber" jdbcType="VARCHAR" />
+    <result column="MCH_ID" property="mchId" jdbcType="VARCHAR" />
+    <result column="DECICE_INFO" property="deciceInfo" jdbcType="VARCHAR" />
+    <result column="NONCE_STR" property="nonceStr" jdbcType="VARCHAR" />
+    <result column="SIGN" property="sign" jdbcType="VARCHAR" />
+    <result column="ATTACH" property="attach" jdbcType="VARCHAR" />
+    <result column="FEE_TYPE" property="feeType" jdbcType="VARCHAR" />
+    <result column="TOTAL_FEE" property="totalFee" jdbcType="DOUBLE" />
+    <result column="SPBILL_CREATE_IP" property="spbillCreateIp" jdbcType="VARCHAR" />
+    <result column="TIME_START" property="timeStart" jdbcType="TIMESTAMP" />
+    <result column="TIME_EXPIRE" property="timeExpire" jdbcType="TIMESTAMP" />
+    <result column="GOODS_TAG" property="goodsTag" jdbcType="VARCHAR" />
+    <result column="TRADE_TYPE" property="tradeType" jdbcType="VARCHAR" />
+    <result column="LIMIT_PAY" property="limitPay" jdbcType="VARCHAR" />
+    <result column="OPENID" property="openid" jdbcType="VARCHAR" />
+    <result column="VERIFICATION" property="verification" jdbcType="INTEGER" />
+    <result column="BANK_TYPE" property="bankType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+ 	 ORDERNUMBER, MCH_ID, DECICE_INFO, NONCE_STR, SIGN, ATTACH, FEE_TYPE, TOTAL_FEE, SPBILL_CREATE_IP, 
+      TIME_START, TIME_EXPIRE, GOODS_TAG, TRADE_TYPE, LIMIT_PAY, OPENID, VERIFICATION, BANK_TYPE
+  </sql>
+  <!-- 查找对应数据 -->
+   <select id="findOrderNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WEIXINPAY
+    where ORDERNUMBER = #{orderNumber,jdbcType=VARCHAR} 
+  </select>
+  
+  <!-- 修改 -->
+  <update id="updateByPrimaryKeySelective" parameterType="pers.aidenj.payment.model.Order">
+  	update WEIXINPAY
+  	<set>
+  	  <if test="ordernumber != null" >
+        ORDERNUMBER = #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mchId != null" >
+        MCH_ID = #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="deciceInfo != null" >
+        DECICE_INFO = #{deciceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="nonceStr != null" >
+        NONCE_STR = #{nonceStr,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        SIGN = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="attach != null" >
+        ATTACH = #{attach,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null" >
+        FEE_TYPE = #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE = #{totalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="spbillCreateIp != null" >
+        SPBILL_CREATE_IP = #{spbillCreateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStart != null" >
+        TIME_START = #{timeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeExpire != null" >
+        TIME_EXPIRE = #{timeExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsTag != null" >
+        GOOD_STAG = #{goodsTag,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        TRADE_TYPE = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="limitPay != null" >
+        LIMIT_PAY = #{limitPay,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        OPENID = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="verification != null" >
+        VERIFICATION = #{verification,jdbcType=INTEGER},
+      </if>
+      <if test="bankType != null" >
+        BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+      </if>
+  	</set>
+  	 where ORDERNUMBER = #{ordernumber,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 添加 -->
+  <insert id="insertSelective" parameterType="pers.aidenj.payment.model.Order" >
+    insert into WEIXINPAY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordernumber != null" >
+        ORDERNUMBER,
+      </if>
+      <if test="mchId != null" >
+        MCH_ID,
+      </if>
+      <if test="deciceInfo != null" >
+        DECICE_INFO,
+      </if>
+      <if test="nonceStr != null" >
+        NONCE_STR,
+      </if>
+      <if test="sign != null" >
+        SIGN,
+      </if>
+      <if test="attach != null" >
+        ATTACH,
+      </if>
+      <if test="feeType != null" >
+        FEE_TYPE,
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE,
+      </if>
+      <if test="spbillCreateIp != null" >
+        SPBILL_CREATE_IP,
+      </if>
+      <if test="timeStart != null" >
+        TIME_START,
+      </if>
+      <if test="timeExpire != null" >
+        TIME_EXPIRE,
+      </if>
+      <if test="goodsTag != null" >
+        GOODS_TAG,
+      </if>
+      <if test="tradeType != null" >
+        TRADE_TYPE,
+      </if>
+      <if test="limitPay != null" >
+        LIMIT_PAY,
+      </if>
+      <if test="openid != null" >
+        OPENID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mchId != null" >
+        #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="deciceInfo != null" >
+        #{deciceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="nonceStr != null" >
+        #{nonceStr,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="attach != null" >
+        #{attach,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null" >
+        #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="spbillCreateIp != null" >
+        #{spbillCreateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStart != null" >
+        #{timeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeExpire != null" >
+        #{timeExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsTag != null" >
+        #{goodsTag,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="limitPay != null" >
+        #{limitPay,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

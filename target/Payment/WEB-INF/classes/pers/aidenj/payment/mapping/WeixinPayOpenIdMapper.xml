@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.aidenj.payment.mapper.WeixinPayOpenIdMapper" >
+  <resultMap id="BaseResultMap" type="pers.aidenj.payment.mapper.WeixinPayOpenId" >
+    <result column="CODEID" property="codeid" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="OPENID" property="openid" jdbcType="VARCHAR" />
+    <result column="ORDERNUMBER" property="ordernumber" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insertSelective" parameterType="pers.aidenj.payment.mapper.WeixinPayOpenId" >
+    insert into WEIXINPAYOPENID
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="codeid != null" >
+        CODEID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="openid != null" >
+        OPENID,
+      </if>
+      <if test="ordernumber != null" >
+        ORDERNUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="codeid != null" >
+        #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.aidenj.payment.mapper.WeixinPayOpenId">
+  	update WEIXINPAYOPENID
+  	<set>
+  	  <if test="codeid != null" >
+        CODEID = #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        OPENID = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernumber != null" >
+        ORDERNUMBER = #{ordernumber,jdbcType=VARCHAR},
+      </if>
+  	</set>
+  	 where CODEID = #{codeid,jdbcType=VARCHAR}
+  </update>
+  <select id="findOrderNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select CODEID,CODE,OPENID,ORDERNUMBER from WEIXINPAYOPENID where ORDERNUMBER = #{orderNumber,jdbcType=VARCHAR} 
+  </select>
+  
+  
+</mapper>

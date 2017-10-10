@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.aidenj.payment.mapper.ALiPayMapper" >
+  <resultMap id="BaseResultMap" type="pers.aidenj.payment.mapper.ALiPay" >
+    <result column="ORDERNUMBER" property="ordernumber" jdbcType="VARCHAR" />
+    <result column="APPID" property="appid" jdbcType="VARCHAR" />
+    <result column="METHOD" property="method" jdbcType="VARCHAR" />
+    <result column="FORMAT" property="format" jdbcType="VARCHAR" />
+    <result column="CHARSET" property="charset" jdbcType="VARCHAR" />
+    <result column="SIGNTYPE" property="signtype" jdbcType="VARCHAR" />
+    <result column="SIGN" property="sign" jdbcType="VARCHAR" />
+    <result column="TIMESTAMP" property="timestamp" jdbcType="TIMESTAMP" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="NOTIFYURL" property="notifyurl" jdbcType="VARCHAR" />
+    <result column="APPAUTHTOKEN" property="appauthtoken" jdbcType="VARCHAR" />
+    <result column="BIZCONTENT" property="bizcontent" jdbcType="VARCHAR" />
+    <result column="OUTTRADENO" property="outtradeno" jdbcType="VARCHAR" />
+    <result column="SELLERID" property="sellerid" jdbcType="VARCHAR" />
+    <result column="TOTALAMOUNT" property="totalamount" jdbcType="DOUBLE" />
+    <result column="DISCOUNTABLEAMOUNT" property="discountableamount" jdbcType="DOUBLE" />
+    <result column="UNDISCOUNTABELAMOUNT" property="undiscountabelamount" jdbcType="DOUBLE" />
+    <result column="BUYERLOGONID" property="buyerlogonid" jdbcType="VARCHAR" />
+    <result column="TIMEOUTEXPRESS" property="timeoutexpress" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+	ORDERNUMBER, APPID, METHOD, FORMAT, CHARSET, SIGNTYPE, SIGN, TIMESTAMP, VERSION, NOTIFYURL, APPAUTHTOKEN,
+	 BIZCONTENT, OUTTRADENO, SELLERID, TOTALAMOUNT, DISCOUNTABLEAMOUNT, UNDISCOUNTABELAMOUNT, BUYERLOGONID, TIMEOUTEXPRESS
+  </sql>
+  <!-- 查找订单对应的ali数据 -->
+  <select id="findOrderNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ALIPAY
+    where ORDERNUMBER = #{orderNumber,jdbcType=VARCHAR} 
+  </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="pers.aidenj.payment.mapper.ALiPay">
+  	update ALIPAY
+    <set >
+      <if test="appid != null" >
+        APPID = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        METHOD = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="format != null" >
+        FORMAT = #{format,jdbcType=VARCHAR},
+      </if>
+      <if test="charset != null" >
+        CHARSET = #{charset,jdbcType=VARCHAR},
+      </if>
+      <if test="signtype != null" >
+        SIGNTYPE = #{signtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        SIGN = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyurl != null" >
+        NOTIFYURL = #{notifyurl,jdbcType=VARCHAR},
+      </if>
+      <if test="appauthtoken != null" >
+        APPAUTHTOKEN = #{appauthtoken,jdbcType=VARCHAR},
+      </if>
+      <if test="bizcontent != null" >
+        BIZCONTENT = #{bizcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="outtradeno != null" >
+        OUTTRADENO = #{outtradeno,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerid != null" >
+        SELLERID = #{sellerid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalamount != null" >
+        TOTALAMOUNT = #{totalamount,jdbcType=DOUBLE},
+      </if>
+      <if test="discountableamount != null" >
+        DISCOUNTABLEAMOUNT = #{discountableamount,jdbcType=DOUBLE},
+      </if>
+      <if test="undiscountabelamount != null" >
+        UNDISCOUNTABELAMOUNT = #{undiscountabelamount,jdbcType=DOUBLE},
+      </if>
+      <if test="buyerlogonid != null" >
+        BUYERLOGONID = #{buyerlogonid,jdbcType=VARCHAR},
+      </if>
+      <if test="timeoutexpress != null" >
+        TIMEOUTEXPRESS = #{timeoutexpress,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ORDERNUMBER = #{ordernumber,jdbcType=VARCHAR}
+  </update>
+  
+  <insert id="insertSelective" parameterType="pers.aidenj.payment.mapper.ALiPay" >
+    insert into ALIPAY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordernumber != null" >
+        ORDERNUMBER,
+      </if>
+      <if test="appid != null" >
+        APPID,
+      </if>
+      <if test="method != null" >
+        METHOD,
+      </if>
+      <if test="format != null" >
+        FORMAT,
+      </if>
+      <if test="charset != null" >
+        CHARSET,
+      </if>
+      <if test="signtype != null" >
+        SIGNTYPE,
+      </if>
+      <if test="sign != null" >
+        SIGN,
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="notifyurl != null" >
+        NOTIFYURL,
+      </if>
+      <if test="appauthtoken != null" >
+        APPAUTHTOKEN,
+      </if>
+      <if test="bizcontent != null" >
+        BIZCONTENT,
+      </if>
+      <if test="outtradeno != null" >
+        OUTTRADENO,
+      </if>
+      <if test="sellerid != null" >
+        SELLERID,
+      </if>
+      <if test="totalamount != null" >
+        TOTALAMOUNT,
+      </if>
+      <if test="discountableamount != null" >
+        DISCOUNTABLEAMOUNT,
+      </if>
+      <if test="undiscountabelamount != null" >
+        UNDISCOUNTABELAMOUNT,
+      </if>
+      <if test="buyerlogonid != null" >
+        BUYERLOGONID,
+      </if>
+      <if test="timeoutexpress != null" >
+        TIMEOUTEXPRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="format != null" >
+        #{format,jdbcType=VARCHAR},
+      </if>
+      <if test="charset != null" >
+        #{charset,jdbcType=VARCHAR},
+      </if>
+      <if test="signtype != null" >
+        #{signtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyurl != null" >
+        #{notifyurl,jdbcType=VARCHAR},
+      </if>
+      <if test="appauthtoken != null" >
+        #{appauthtoken,jdbcType=VARCHAR},
+      </if>
+      <if test="bizcontent != null" >
+        #{bizcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="outtradeno != null" >
+        #{outtradeno,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerid != null" >
+        #{sellerid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalamount != null" >
+        #{totalamount,jdbcType=DOUBLE},
+      </if>
+      <if test="discountableamount != null" >
+        #{discountableamount,jdbcType=DOUBLE},
+      </if>
+      <if test="undiscountabelamount != null" >
+        #{undiscountabelamount,jdbcType=DOUBLE},
+      </if>
+      <if test="buyerlogonid != null" >
+        #{buyerlogonid,jdbcType=VARCHAR},
+      </if>
+      <if test="timeoutexpress != null" >
+        #{timeoutexpress,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
